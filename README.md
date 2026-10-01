@@ -2,7 +2,7 @@
 
 Code and results for the paper **"Is Your Grade Personal? Separating Personal, Community, and Contextual Effects in Perceived Climbing Difficulty"**, by Peter Chen, Roger Jin and Hector Liao (CS 371W Research Practicum in AI, Emory University, Fall 2026).
 
-The paper asks when a climber's own history improves the prediction of how hard a route will feel. It introduces PACE (Personalization with Aggregate and Contextual Evidence), a random effects model that estimates a personal effect of the climber, a community effect of the route and a contextual effect of the setter jointly, shrinks each by its evidence and refits as logs arrive. PACE-G applies the personal effect only when its posterior interval excludes zero, and PACE-GBM adds a boosted correction. Every number, table and figure in the paper is produced by the scripts here. Nothing is typed by hand.
+The paper asks when a climber's own history improves the prediction of how hard a route will feel. It introduces PACE (Personalization with Aggregate and Contextual Evidence), a random effects model that estimates a personal effect of the climber, a community effect of the route and a contextual effect of the setter jointly, shrinks each by its evidence and refits as logs arrive. PACE-G applies the personal effect only when its posterior interval excludes zero, and PACE-GBM adds a boosted correction.
 
 ## What is in this repository
 
