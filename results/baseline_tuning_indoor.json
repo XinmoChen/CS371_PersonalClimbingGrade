@@ -1,0 +1,170 @@
+[
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 20,
+  "devRMSE": 0.37073866702565206
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 50,
+  "devRMSE": 0.3653245507607093
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 100,
+  "devRMSE": 0.3652581608815573
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 20,
+  "devRMSE": 0.37138472271109507
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 50,
+  "devRMSE": 0.36520845530250223
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 100,
+  "devRMSE": 0.364383832343835
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 20,
+  "devRMSE": 0.3741341153149698
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 50,
+  "devRMSE": 0.3665800366794422
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 100,
+  "devRMSE": 0.36479435809512284
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 15,
+  "best_iter": 458,
+  "devRMSE": 0.3458054649307973
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 31,
+  "best_iter": 314,
+  "devRMSE": 0.34540639730914274
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 63,
+  "best_iter": 123,
+  "devRMSE": 0.3449687220007088
+ },
+ {
+  "protocol": "A",
+  "svd_choice": [
+   40,
+   100
+  ],
+  "gbm_choice": [
+   63,
+   123
+  ],
+  "gbm_rounds_refit": 137
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 20,
+  "devRMSE": 0.3947452313400849
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 50,
+  "devRMSE": 0.4025340369266594
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 100,
+  "devRMSE": 0.4100542451352468
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 20,
+  "devRMSE": 0.3948975599536429
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 50,
+  "devRMSE": 0.4019619098291452
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 100,
+  "devRMSE": 0.4086227395525806
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 20,
+  "devRMSE": 0.3959154165483973
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 50,
+  "devRMSE": 0.40126870943666887
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 100,
+  "devRMSE": 0.40616192220440933
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 15,
+  "best_iter": 213,
+  "devRMSE": 0.3561007861020378
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 31,
+  "best_iter": 87,
+  "devRMSE": 0.3568899036088401
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 63,
+  "best_iter": 63,
+  "devRMSE": 0.3564474662458793
+ },
+ {
+  "protocol": "B",
+  "svd_choice": [
+   20,
+   20
+  ],
+  "gbm_choice": [
+   15,
+   213
+  ],
+  "gbm_rounds_refit": 251
+ }
+]

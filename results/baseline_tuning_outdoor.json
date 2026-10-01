@@ -1,0 +1,170 @@
+[
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 20,
+  "devRMSE": 0.31743588359208824
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 50,
+  "devRMSE": 0.3172999718260315
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 100,
+  "devRMSE": 0.3184137924704151
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 20,
+  "devRMSE": 0.31827101483323406
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 50,
+  "devRMSE": 0.3173676318013323
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 100,
+  "devRMSE": 0.317950985977184
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 20,
+  "devRMSE": 0.32124691311870157
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 50,
+  "devRMSE": 0.3175543939360542
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 100,
+  "devRMSE": 0.3164605230441652
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 15,
+  "best_iter": 912,
+  "devRMSE": 0.2859896054823058
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 31,
+  "best_iter": 242,
+  "devRMSE": 0.28583911624241465
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 63,
+  "best_iter": 230,
+  "devRMSE": 0.28629525932722605
+ },
+ {
+  "protocol": "A",
+  "svd_choice": [
+   100,
+   100
+  ],
+  "gbm_choice": [
+   31,
+   242
+  ],
+  "gbm_rounds_refit": 271
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 20,
+  "devRMSE": 0.37703741721493683
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 50,
+  "devRMSE": 0.3685584116648386
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 20,
+  "n_epochs": 100,
+  "devRMSE": 0.3680280227693703
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 20,
+  "devRMSE": 0.3782285101313971
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 50,
+  "devRMSE": 0.36942420972077605
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 40,
+  "n_epochs": 100,
+  "devRMSE": 0.36822110322560675
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 20,
+  "devRMSE": 0.38102448263098926
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 50,
+  "devRMSE": 0.37100972616304523
+ },
+ {
+  "model": "B2-SVD",
+  "n_factors": 100,
+  "n_epochs": 100,
+  "devRMSE": 0.3680934502542366
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 15,
+  "best_iter": 506,
+  "devRMSE": 0.33902281607273027
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 31,
+  "best_iter": 291,
+  "devRMSE": 0.3389837942209061
+ },
+ {
+  "model": "B3-GBM",
+  "leaves": 63,
+  "best_iter": 183,
+  "devRMSE": 0.33962291930036664
+ },
+ {
+  "protocol": "B",
+  "svd_choice": [
+   20,
+   100
+  ],
+  "gbm_choice": [
+   31,
+   291
+  ],
+  "gbm_rounds_refit": 555
+ }
+]

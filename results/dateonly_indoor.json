@@ -1,0 +1,19 @@
+{
+ "share_dateonly_logs": 0.0736986301369863,
+ "A": {
+  "test_logs": 38352,
+  "exposed_test_logs": 5943,
+  "RMSE_main": 0.3687768670921419,
+  "RMSE_conservative": 0.36931241164764406,
+  "personal_gain_main": 0.005823485108434057,
+  "personal_gain_conservative": 0.005766911333510538
+ },
+ "B": {
+  "test_logs": 52138,
+  "exposed_test_logs": 9026,
+  "RMSE_main": 0.3774665572504565,
+  "RMSE_conservative": 0.37795971928526173,
+  "personal_gain_main": 0.007336195183344052,
+  "personal_gain_conservative": 0.007287828330442114
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "setting": "outdoor",
+ "logs": 157567,
+ "climbers": 2624,
+ "routes": 10738,
+ "setters": null,
+ "date_min": "2010-01-01",
+ "date_max": "2020-11-02",
+ "disagree": 0.07668483883046577,
+ "dev_counts": {
+  "-3": 204,
+  "-2": 1647,
+  "-1": 4250,
+  "0": 145484,
+  "1": 4295,
+  "2": 1589,
+  "3": 98
+ },
+ "route_life_median_days": 1492.0,
+ "first_log_share": 0.06880247767616315,
+ "climbers_disagree_once": 0.7560975609756098,
+ "logs_per_climber_median": 39.0,
+ "logs_per_route_median": 10.0,
+ "grade_min": 6,
+ "grade_max": 22
+}

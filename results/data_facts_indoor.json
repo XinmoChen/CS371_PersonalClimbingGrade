@@ -1,0 +1,26 @@
+{
+ "setting": "indoor",
+ "logs": 186150,
+ "climbers": 2829,
+ "routes": 25589,
+ "setters": 349,
+ "date_min": "2018-09-01",
+ "date_max": "2020-01-01",
+ "disagree": 0.08262691377921032,
+ "dev_counts": {
+  "-3": 442,
+  "-2": 2588,
+  "-1": 4195,
+  "0": 170769,
+  "1": 5939,
+  "2": 1982,
+  "3": 235
+ },
+ "route_life_median_days": 50.0,
+ "first_log_share": 0.13817351598173516,
+ "climbers_disagree_once": 0.7617532697066101,
+ "logs_per_climber_median": 42.0,
+ "logs_per_route_median": 5.0,
+ "grade_min": 6,
+ "grade_max": 22
+}

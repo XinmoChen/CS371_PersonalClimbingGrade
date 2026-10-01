@@ -1,0 +1,48 @@
+{
+ "routes": 25589,
+ "routes_with_more_than_one_setter": 0,
+ "A": {
+  "climbers": 2829,
+  "share_with_disagreement": 0.41498762813715095,
+  "with_disagreement": {
+   "n": 1174,
+   "helped": 0.38841567291311757,
+   "hurt": 0.3696763202725724
+  },
+  "all_agree": {
+   "n": 1655,
+   "helped": 0.12084592145015106,
+   "hurt": 0.2012084592145015
+  },
+  "hurt_with_unchanged_displayed_error": 0.9439374185136897,
+  "mean_mse_change_hurt": 0.008235556333976154,
+  "mean_mse_change_helped": -0.02291387609195439,
+  "gate_keeps": {
+   "point": 0.9454202110757559,
+   "lo": 0.8720689314075529,
+   "hi": 0.9888900622607066
+  }
+ },
+ "B": {
+  "climbers": 1786,
+  "share_with_disagreement": 0.5492721164613662,
+  "with_disagreement": {
+   "n": 981,
+   "helped": 0.3333333333333333,
+   "hurt": 0.40468909276248727
+  },
+  "all_agree": {
+   "n": 805,
+   "helped": 0.10186335403726708,
+   "hurt": 0.1937888198757764
+  },
+  "hurt_with_unchanged_displayed_error": 0.9005424954792043,
+  "mean_mse_change_hurt": 0.00996612620890275,
+  "mean_mse_change_helped": -0.029664475875465973,
+  "gate_keeps": {
+   "point": 0.964503684550146,
+   "lo": 0.9132423250053133,
+   "hi": 1.006764750062554
+  }
+ }
+}

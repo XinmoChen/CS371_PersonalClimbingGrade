@@ -1,0 +1,59 @@
+{
+ "n": 100,
+ "agree": 80,
+ "disagreements": [
+  {
+   "rule": "Right direction, too cautious to show",
+   "reading": "Lone dissent, no signal anywhere",
+   "count": 5
+  },
+  {
+   "rule": "New route, no community evidence",
+   "reading": "Right direction, too cautious to show",
+   "count": 4
+  },
+  {
+   "rule": "Other",
+   "reading": "Lone dissent, no signal anywhere",
+   "count": 3
+  },
+  {
+   "rule": "Lone dissent, no signal anywhere",
+   "reading": "Evidence pointed the other way",
+   "count": 2
+  },
+  {
+   "rule": "Evidence pointed the other way",
+   "reading": "Lone dissent, no signal anywhere",
+   "count": 2
+  },
+  {
+   "rule": "Early dissent, confirmed later",
+   "reading": "Right direction, too cautious to show",
+   "count": 1
+  },
+  {
+   "rule": "Lone dissent, no signal anywhere",
+   "reading": "Right direction, too cautious to show",
+   "count": 1
+  },
+  {
+   "rule": "Other",
+   "reading": "Early dissent, confirmed later",
+   "count": 1
+  },
+  {
+   "rule": "Right direction, too cautious to show",
+   "reading": "Early dissent, confirmed later",
+   "count": 1
+  }
+ ],
+ "reading_distribution": {
+  "Right direction, too cautious to show": 35,
+  "Lone dissent, no signal anywhere": 26,
+  "New route, no community evidence": 22,
+  "Right direction, too few steps": 12,
+  "Evidence pointed the other way": 3,
+  "Early dissent, confirmed later": 2
+ }
+}

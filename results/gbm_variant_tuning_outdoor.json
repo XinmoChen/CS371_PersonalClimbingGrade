@@ -1,0 +1,128 @@
+[
+ {
+  "protocol": "A",
+  "model": "B3-GBM[-climber]",
+  "leaves": 15,
+  "best_iter": 611,
+  "devRMSE": 0.30242940989105155
+ },
+ {
+  "protocol": "A",
+  "model": "B3-GBM[-climber]",
+  "leaves": 31,
+  "best_iter": 646,
+  "devRMSE": 0.3021463962565789
+ },
+ {
+  "protocol": "A",
+  "model": "B3-GBM[-climber]",
+  "leaves": 63,
+  "best_iter": 395,
+  "devRMSE": 0.30265288317171873
+ },
+ {
+  "protocol": "A",
+  "model": "PACE-GBM",
+  "leaves": 15,
+  "best_iter": 962,
+  "devRMSE": 0.2804573372660243
+ },
+ {
+  "protocol": "A",
+  "model": "PACE-GBM",
+  "leaves": 31,
+  "best_iter": 348,
+  "devRMSE": 0.28086200997670147
+ },
+ {
+  "protocol": "A",
+  "model": "PACE-GBM",
+  "leaves": 63,
+  "best_iter": 237,
+  "devRMSE": 0.2796182950143419
+ },
+ {
+  "protocol": "A",
+  "model": "PACE-GBM[-climber]",
+  "leaves": 15,
+  "best_iter": 506,
+  "devRMSE": 0.29903240930947483
+ },
+ {
+  "protocol": "A",
+  "model": "PACE-GBM[-climber]",
+  "leaves": 31,
+  "best_iter": 419,
+  "devRMSE": 0.298377651812693
+ },
+ {
+  "protocol": "A",
+  "model": "PACE-GBM[-climber]",
+  "leaves": 63,
+  "best_iter": 189,
+  "devRMSE": 0.2985806840368714
+ },
+ {
+  "protocol": "B",
+  "model": "B3-GBM[-climber]",
+  "leaves": 15,
+  "best_iter": 143,
+  "devRMSE": 0.36101756311050487
+ },
+ {
+  "protocol": "B",
+  "model": "B3-GBM[-climber]",
+  "leaves": 31,
+  "best_iter": 73,
+  "devRMSE": 0.3610600725911726
+ },
+ {
+  "protocol": "B",
+  "model": "B3-GBM[-climber]",
+  "leaves": 63,
+  "best_iter": 74,
+  "devRMSE": 0.3613783634981687
+ },
+ {
+  "protocol": "B",
+  "model": "PACE-GBM",
+  "leaves": 15,
+  "best_iter": 303,
+  "devRMSE": 0.3360358493882216
+ },
+ {
+  "protocol": "B",
+  "model": "PACE-GBM",
+  "leaves": 31,
+  "best_iter": 201,
+  "devRMSE": 0.3363667706475304
+ },
+ {
+  "protocol": "B",
+  "model": "PACE-GBM",
+  "leaves": 63,
+  "best_iter": 95,
+  "devRMSE": 0.33756474122783103
+ },
+ {
+  "protocol": "B",
+  "model": "PACE-GBM[-climber]",
+  "leaves": 15,
+  "best_iter": 155,
+  "devRMSE": 0.35909747965953126
+ },
+ {
+  "protocol": "B",
+  "model": "PACE-GBM[-climber]",
+  "leaves": 31,
+  "best_iter": 95,
+  "devRMSE": 0.35909863079711163
+ },
+ {
+  "protocol": "B",
+  "model": "PACE-GBM[-climber]",
+  "leaves": 63,
+  "best_iter": 51,
+  "devRMSE": 0.3590963536896641
+ }
+]
