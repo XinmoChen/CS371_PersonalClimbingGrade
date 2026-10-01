@@ -1,0 +1,24 @@
+{
+ "slope_outdoor_on_indoor": {
+  "train": 0.47460906657431695,
+  "train_lo": 0.05825739517409465,
+  "train_hi": 0.9563405532243097,
+  "train_climbers": 267,
+  "test": 0.3694313657744937
+ },
+ "corr_outdoor_vs_indoor": {
+  "r": 0.29821860633341335,
+  "n": 305
+ },
+ "slope_indoor_on_outdoor": {
+  "train": 0.4322651021815511,
+  "train_lo": 0.23388335458290666,
+  "train_hi": 0.9315116338550067,
+  "train_climbers": 320,
+  "test": 0.4381458539663722
+ },
+ "corr_indoor_vs_outdoor": {
+  "r": 0.2735146521315552,
+  "n": 331
+ }
+}
