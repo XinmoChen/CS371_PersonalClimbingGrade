@@ -1,0 +1,8 @@
+# Versions used for the results in results/ (Python 3.11.15, see results/environment.json)
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.8.0
+lightgbm==4.7.0
+scikit-surprise==1.1.5
+statsmodels==0.15.0
+matplotlib==3.10.9
