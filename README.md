@@ -30,7 +30,7 @@ The code looks for the data in `../climbing_grade_prediction/data` by default. S
 ```bash
 cd CS371_PersonalClimbingGrade
 pip install -r requirements.txt
-./run_all.sh
+bash run_all.sh
 ```
 
 `run_all.sh` takes about three to four hours on two CPU cores. It runs, in order: data statistics, penalty tuning on development rows, PACE and every baseline under both protocols, ablations, boosted models, evaluation, every analysis of Section 5, the correctness checks, and finally `make_tables.py` and `make_figures.py`, which write `tables/` and `figures/`. Seeded models use seeds 0 to 4 and PACE is deterministic, so a rerun on the same package versions reproduces the files in `results/`. The runtime in `results/timing_indoor.json` is meaningful only on an otherwise idle machine.
