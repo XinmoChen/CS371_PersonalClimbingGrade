@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rebuilds every result in results/, every table in tables/ and every figure in figures/ from the released data,
-# in the order used for the paper. About three to four hours on two CPU cores. Logs go to logs/.
+# in the order used for the paper. About five and a half hours on two CPU cores. Logs go to logs/.
 # The data must be cloned next to this folder (see README) or CLIMB_DATA must point to its data/ folder.
 set -e
 cd "$(dirname "$0")"
@@ -33,6 +33,7 @@ run python3 run_gbm_variants.py outdoor
 # 3. Development analyses (Section 4.6)
 run python3 run_consensus_shape.py
 run python3 run_ash_trial.py route
+run python3 run_ash_trial.py all
 
 # 4. Evaluation and analyses (Sections 4.7 and 5)
 run python3 run_evaluate.py indoor

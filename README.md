@@ -2,7 +2,7 @@
 
 Code and results for the paper **"Is Your Grade Personal? Separating Personal, Community, and Contextual Effects in Perceived Climbing Difficulty"**, by Peter Chen, Roger Jin and Hector Liao (CS 371W Research Practicum in AI, Emory University, Fall 2026).
 
-The paper asks when a climber's own history improves the prediction of how hard a route will feel. It introduces PACE (Personalization with Aggregate and Contextual Evidence), a random effects model that estimates a personal effect of the climber, a community effect of the route and a contextual effect of the setter jointly, shrinks each by its evidence and refits as logs arrive. PACE-G applies the personal effect only when its posterior interval excludes zero, and PACE-GBM adds a boosted correction.
+The paper asks when a climber's own history improves the prediction of how hard a route will feel. It introduces PACE (Personalization with Aggregate and Contextual Evidence), a random effects model that estimates a personal effect of the climber, a community effect of the route and a contextual effect of the setter jointly, shrinks each by its evidence and refits as logs arrive. PACE-G applies the personal effect only when its posterior interval excludes zero, and PACE-GBM adds a boosted correction. Every number, table and figure in the paper is produced by the scripts here. Nothing is typed by hand.
 
 ## What is in this repository
 
@@ -33,7 +33,18 @@ pip install -r requirements.txt
 bash run_all.sh
 ```
 
-`run_all.sh` takes about three to four hours on two CPU cores. It runs, in order: data statistics, penalty tuning on development rows, PACE and every baseline under both protocols, ablations, boosted models, evaluation, every analysis of Section 5, the correctness checks, and finally `make_tables.py` and `make_figures.py`, which write `tables/` and `figures/`. Seeded models use seeds 0 to 4 and PACE is deterministic, so a rerun on the same package versions reproduces the files in `results/`. The runtime in `results/timing_indoor.json` is meaningful only on an otherwise idle machine.
+`run_all.sh` takes about five and a half hours on two CPU cores. It runs, in order: data statistics, penalty tuning on development rows, PACE and every baseline under both protocols, ablations, boosted models, evaluation, every analysis of Section 5, the correctness checks, and finally `make_tables.py` and `make_figures.py`, which write `tables/` and `figures/`. Seeded models use seeds 0 to 4 and PACE is deterministic. The runtime in `results/timing_indoor.json` is meaningful only on an otherwise idle machine.
+
+### What a rerun reproduces
+
+A clean rerun of `run_all.sh` from a fresh clone, on the package versions in `requirements.txt` and two CPU cores, took 5 hours 23 minutes. Compared with the files released here:
+
+- Every LaTeX table it wrote was identical to the paper's, byte for byte. Every figure was identical except for a few anti aliased pixels, and no number quoted in the paper changed.
+- PACE, every ablation, every PACE-GBM model and every baseline gave identical predictions, with one exception. LightGBM picks row wise or column wise histogram building by timing a short test at each fit, so a rerun can change a few boosted predictions. In this rerun B3 with seed 4 under outdoor Protocol B changed 611 of 63,013 test predictions, by at most 0.11. That moved B3's outdoor Protocol B RMSE from 0.305111 to 0.305112, and the outdoor Protocol B values derived from it (`helped_outdoor_B.csv`, `strata_outdoor_B.csv`, `paired_bootstrap.json`, `regrade_outdoor.json`, `ordinal_outdoor_B.csv`, `boot_outdoor_B.json`) by at most 0.0001 in an RMSE, 0.06 percentage points in a share and 0.0008 in a bootstrap probability.
+- Development RMSE values in the tuning files agreed to within 1e-9, and every tuned penalty was the same.
+- `pace_tuning_all_indoor.csv` here also holds the 7 settings of the first PACE-X grid described under Notes, so a rerun writes it without those rows.
+- The outdoor strata files list the baselines in a different order within each stratum.
+- Runtimes differ.
 
 ## Two evaluation protocols
 
