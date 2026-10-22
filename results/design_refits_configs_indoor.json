@@ -1,0 +1,54 @@
+{
+ "shrink100": {
+  "climber": 100,
+  "route": 3.0,
+  "env": 30.0
+ },
+ "shrink200": {
+  "climber": 200,
+  "route": 3.0,
+  "env": 30.0
+ },
+ "shrink400": {
+  "climber": 400,
+  "route": 3.0,
+  "env": 30.0
+ },
+ "shrink1000": {
+  "climber": 1000,
+  "route": 3.0,
+  "env": 30.0
+ },
+ "shrink3000": {
+  "climber": 3000,
+  "route": 3.0,
+  "env": 30.0
+ },
+ "k4[]": {},
+ "k4[climber]": {
+  "climber": 4.0
+ },
+ "k4[route]": {
+  "route": 4.0
+ },
+ "k4[env]": {
+  "env": 4.0
+ },
+ "k4[climber+route]": {
+  "climber": 4.0,
+  "route": 4.0
+ },
+ "k4[climber+env]": {
+  "climber": 4.0,
+  "env": 4.0
+ },
+ "k4[route+env]": {
+  "route": 4.0,
+  "env": 4.0
+ },
+ "k4[climber+route+env]": {
+  "climber": 4.0,
+  "route": 4.0,
+  "env": 4.0
+ }
+}

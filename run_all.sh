@@ -1,6 +1,6 @@
 #!/bin/bash
 # Rebuilds every result in results/, every table in tables/ and every figure in figures/ from the released data,
-# in the order used for the paper. About five and a half hours on two CPU cores. Logs go to logs/.
+# in the order used for the paper. About six hours on two CPU cores. Logs go to logs/.
 # The data must be cloned next to this folder (see README) or CLIMB_DATA must point to its data/ folder.
 set -e
 cd "$(dirname "$0")"
@@ -51,11 +51,18 @@ run python3 run_extra.py
 run python3 run_mechanisms.py
 run python3 run_data_audit.py
 
-# 5. Checks, environment, runtime, tables and figures
+# 5. Design checks of the approach section (Sections 3.9, 5.3, 5.4 and 5.9)
+run python3 run_design_refits.py A                  # PACE refits with stronger shrinkage and with every penalty at k = 4
+run python3 run_design_refits.py B
+run python3 run_design_checks.py
+
+# 6. Checks, environment, runtime, tables and figures
 run python3 test_pace_exactness.py
 run python3 verify_all.py
 run python3 record_env.py
 run python3 run_timing.py                           # meaningful only on an otherwise idle machine
 run python3 make_tables.py indoor outdoor
 run python3 make_figures.py
+run python3 make_design_tables.py
+run python3 make_design_figures.py
 echo "done: see results/, tables/ and figures/"

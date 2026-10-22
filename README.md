@@ -33,7 +33,7 @@ pip install -r requirements.txt
 bash run_all.sh
 ```
 
-`run_all.sh` takes about five and a half hours on two CPU cores. It runs, in order: data statistics, penalty tuning on development rows, PACE and every baseline under both protocols, ablations, boosted models, evaluation, every analysis of Section 5, the correctness checks, and finally `make_tables.py` and `make_figures.py`, which write `tables/` and `figures/`. Seeded models use seeds 0 to 4 and PACE is deterministic. The runtime in `results/timing_indoor.json` is meaningful only on an otherwise idle machine.
+`run_all.sh` takes about six hours on two CPU cores. It runs, in order: data statistics, penalty tuning on development rows, PACE and every baseline under both protocols, ablations, boosted models, evaluation, every analysis of Section 5, the design checks of Section 3.9, the correctness checks, and finally `make_tables.py`, `make_figures.py`, `make_design_tables.py` and `make_design_figures.py`, which write `tables/` and `figures/`. Seeded models use seeds 0 to 4 and PACE is deterministic. The runtime in `results/timing_indoor.json` is meaningful only on an otherwise idle machine.
 
 ### What a rerun reproduces
 
@@ -46,6 +46,8 @@ A clean rerun of `run_all.sh` from a fresh clone, on the package versions in `re
 - The outdoor strata files list the baselines in a different order within each stratum.
 - Runtimes differ.
 
+The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_tables.py`, `make_design_figures.py`) were added after that rerun. We ran them with Python 3.13.16 and the package versions in `requirements.txt`, on two CPU cores, in about 40 minutes. On the way, we rebuilt the indoor predictions of PACE, its source subsets, every baseline and the boosted models, and each reproduced its released test RMSE to six decimals. A second run of the checks wrote identical result files.
+
 ## Two evaluation protocols
 
 - **Protocol A (published split).** The first 80% of each climber's logs in time order are training logs and the last 20% are test logs, as in Andrić et al. (2021). The last 10% of each climber's training logs, rounded up, form the development set. Because the split is per climber, 59.2% of indoor test logs have a training log on the same route dated later, so a model fit once on the training rows can learn from the future of a route.
@@ -53,7 +55,7 @@ A clean rerun of `run_all.sh` from a fresh clone, on the package versions in `re
 
 ## Rules the code follows
 
-- A prediction for a log uses only logs with a strictly earlier timestamp, as in the released SQL (`date < t`). PACE refits on earlier logs for every prediction.
+- A prediction for a log uses only logs with a strictly earlier timestamp, as in the released SQL (`date < t`). PACE refits on all earlier days at the start of each day and gives later logs of the same day one conditional update from that day's earlier logs.
 - Only an allowlist of columns is loaded (`common.py`). The proposed grade flag, rating, recommendation, tries, repeats, ascent style and style tags are never read by any model or feature, because most of them are written together with the perceived grade. `run_data_audit.py` reads `grade_proposal` once, only to report how often it marks a disagreement (97.6% of flagged logs).
 - Every tuned setting is chosen on development rows. Test rows are scored once. Each protocol tunes on its own development rows, because the Protocol A development rows run into the Protocol B test period.
 - Intervals come from a climber cluster bootstrap with 1,000 resamples shared by every model and seed. Results of seeded models are computed per seed and averaged.
@@ -69,6 +71,7 @@ A clean rerun of `run_all.sh` from a fresh clone, on the package versions in `re
 | 3.6 Evidence gate | keep the personal effect only if its 95% interval excludes zero | `pace_model.py` (`gated`) |
 | 3.7 PACE-GBM | LightGBM started from the PACE prediction | `run_gbm_variants.py` |
 | 3.8 Attribution, ordinal head | Shapley attribution over personal, community and context, and a cumulative logit head | `run_evaluate.py` |
+| 3.9 Design choices | the gate against a log count rule, an effect size rule, a track record rule and stronger shrinkage, attribution with every penalty fixed at k = 4, logs the gate needs | `run_design_refits.py`, `run_design_checks.py` |
 | 4.2 Splits | Protocol A and Protocol B | `common.py`, `run_data_stats.py` |
 | 4.3 Baselines | official grade, SSE with linear regression and random forest, SVD, LightGBM | `run_baselines.py`, `features.py` |
 | 4.4 Metrics | RMSE, displayed RMSE, per climber RMSE, disagreement RMSE, macro F1, average precision, helped and hurt shares, cluster bootstrap | `metrics.py` |
@@ -77,14 +80,16 @@ A clean rerun of `run_all.sh` from a fresh clone, on the package versions in `re
 | 4.7 Results | main tables, paired bootstrap for every comparison in the text | `run_evaluate.py`, `run_paired.py` |
 | 5.1 Attribution | Shapley values, ablations, why the ablations behave as they do | `run_evaluate.py`, `run_ablation.py`, `run_mechanisms.py` |
 | 5.2 Sparse history | results by route and climber history, climber history budget, gain grid | `run_evaluate.py`, `run_budget.py`, `run_gain_grid.py` |
-| 5.3 Selectivity | climbers helped and hurt, gate sweep, who is hurt, gate retention | `run_evaluate.py`, `run_extra.py` |
-| 5.4 Transfer | personal effects swapped between gym and crag | `run_transfer.py` |
-| 5.5 Grade relation | routes whose deviation shifts by a grade or more, disagreement by year, month and group, recent route averages | `run_regrade.py`, `run_window_check.py` |
-| 5.6 By label | precision and recall per label, calibration | `run_evaluate.py` |
+| 5.3 Where PACE improves | paired differences of PACE against the published forest and of PACE-GBM against plain boosting, by route history, climber history and label, and the size of each model's predictions | `run_design_checks.py` |
+| 5.4 Selectivity | climbers helped and hurt, gate sweep, who is hurt, gate retention, the gate against simpler rules | `run_evaluate.py`, `run_extra.py`, `run_design_checks.py` |
+| 5.5 Transfer | personal effects swapped between gym and crag | `run_transfer.py` |
+| 5.6 Grade relation | routes whose deviation shifts by a grade or more, disagreement by year, month and group, recent route averages | `run_regrade.py`, `run_window_check.py` |
 | 5.7 Errors | rule based causes, 100 sampled errors and their second reading | `run_errors.py`, `check_manual_labels.py` |
+| 5.9 Future directions | logs needed before the gate applies an effect of a given size | `run_design_checks.py` |
 | Appendix A | logs without a time of day, data facts | `run_dateonly.py`, `run_data_audit.py` |
+| Appendix B | precision and recall per label, errors by grade, calibration | `run_evaluate.py` |
 | Checks | prequential exactness, determinism, reproduction, leakage, Shapley sums, bootstrap, gate endpoints | `test_pace_exactness.py`, `verify_all.py` |
-| Output | LaTeX tables and PDF figures | `make_tables.py`, `make_figures.py` |
+| Output | LaTeX tables and PDF figures | `make_tables.py`, `make_figures.py`, `make_design_tables.py`, `make_design_figures.py` |
 
 ## Notes
 
