@@ -2,6 +2,7 @@
 adaptive shrinkage mixture prior (Stephens 2017), fits its weights by empirical Bayes on Protocol A training rows,
 then runs the prequential pass. Usage: python run_ash_trial.py route. The development RMSE it prints (0.38461 for
 'route') is the number quoted in the paper, against 0.3683 for PACE, so the prior was dropped.
+Output: results/ash_trial_<cfg>.json (development and test RMSE), scratch_ash_pi_<cfg>.json and scratch_ash_<cfg>.npy.
 S2 is the fixed noise variance used in this exploratory trial."""
 import numpy as np, json, time, sys
 from common import *
@@ -12,7 +13,7 @@ sp = split_protocol_a(g); trn = np.where(sp == 'train')[0]
 # static EB on training rows (reordered prefix)
 gg = g.iloc[trn]
 Xt = X[trn]; dt = d[trn]
-LAM = json.load(open('results/pace_lambdas_indoor.json'))
+LAM = json.load(open(f'{OUT_DIR}/pace_lambdas_indoor.json'))
 S2 = 0.1166
 cfg = sys.argv[1] if len(sys.argv) > 1 else 'all'
 def blocks_for(codes_fn, which):
@@ -32,8 +33,12 @@ for b, b2 in zip(bf, bt):
     b.pi = b2.pi
 t0 = time.time(); res = prequential(d, X, bf, g.day.values, g.t.values); print('preq time', round(time.time()-t0))
 p = res['pred']
+summary = {}
 for part in ('dev', 'test'):
     m = sp == part
+    summary[part] = dict(RMSE=float(np.sqrt(np.mean((d[m] - p[m]) ** 2))),
+                         RMSE_r=float(np.sqrt(np.mean((d[m] - np.clip(np.round(p[m]), -3, 3)) ** 2))))
     print(cfg, part, 'RMSE', round(float(np.sqrt(np.mean((d[m]-p[m])**2))), 5), 'RMSE_r', round(float(np.sqrt(np.mean((d[m]-np.clip(np.round(p[m]),-3,3))**2))), 5))
-np.save(f'results/scratch_ash_{cfg}.npy', p)
-json.dump({b.name: b.pi.tolist() for b in bf if b.prior == 'ash'}, open(f'results/scratch_ash_pi_{cfg}.json', 'w'))
+np.save(f'{OUT_DIR}/scratch_ash_{cfg}.npy', p)
+json.dump({b.name: b.pi.tolist() for b in bf if b.prior == 'ash'}, open(f'{OUT_DIR}/scratch_ash_pi_{cfg}.json', 'w'))
+json.dump(dict(config=cfg, ash_blocks=which, protocol='A', **summary), open(f'{OUT_DIR}/ash_trial_{cfg}.json', 'w'), indent=1)

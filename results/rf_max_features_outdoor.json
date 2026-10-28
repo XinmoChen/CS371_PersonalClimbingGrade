@@ -1,0 +1,8 @@
+{
+ "n_features": 14,
+ "seed": 0,
+ "A|released, 4 features per split|devRMSE": 0.9126979499851552,
+ "A|every feature per split|devRMSE": 0.29678217117393285,
+ "B|released, 4 features per split|devRMSE": 0.9902269927572087,
+ "B|every feature per split|devRMSE": 0.35014402851950993
+}

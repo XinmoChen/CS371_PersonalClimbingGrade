@@ -1,5 +1,6 @@
-"""Outdoor diagnostic for Section 5.5: does recent route evidence help? Linear regression on the released outdoor
-SSE features with the lifetime route mean only, against the same model with the 1.5 year windowed route means added.
+"""Outdoor diagnostic for Section 5.6 and Appendix B (remedies for the outdoor shift): does recent route evidence
+help? Linear regression on the released outdoor SSE features with the lifetime route mean only, against the same
+model with the 1.5 year windowed route means added.
 Protocol B refits at the start of every test month. Output: results/window_check_outdoor.json."""
 import numpy as np, pandas as pd, sys, json
 

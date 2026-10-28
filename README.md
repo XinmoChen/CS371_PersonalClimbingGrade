@@ -48,6 +48,8 @@ A clean rerun of `run_all.sh` from a fresh clone, on the package versions in `re
 
 The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_tables.py`, `make_design_figures.py`) were added after that rerun. We ran them with Python 3.13.16 and the package versions in `requirements.txt`, on two CPU cores, in about 40 minutes. On the way, we rebuilt the indoor predictions of PACE, its source subsets, every baseline and the boosted models, and each reproduced its released test RMSE to six decimals. A second run of the checks wrote identical result files.
 
+`test_pace_exactness.py`, `run_ash_trial.py` and `check_rf_max_features.py` also save the numbers they print (`exactness_check.json`, `ash_trial_route.json`, `ash_trial_all.json` and `rf_max_features_outdoor.json`), and `run_data_stats.py` adds the disagreement rates quoted in the introduction to `data_facts_<setting>.json`. Rerunning these scripts changed no existing value in any result file.
+
 ## Two evaluation protocols
 
 - **Protocol A (published split).** The first 80% of each climber's logs in time order are training logs and the last 20% are test logs, as in Andrić et al. (2021). The last 10% of each climber's training logs, rounded up, form the development set. Because the split is per climber, 59.2% of indoor test logs have a training log on the same route dated later, so a model fit once on the training rows can learn from the future of a route.
@@ -64,6 +66,7 @@ The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_
 
 | Paper section | What | File |
 |---|---|---|
+| 1 Introduction | data facts quoted in the introduction, such as disagreement on routes with no earlier log or with ten or more | `run_data_stats.py` |
 | 3.1 Task | loading, allowed columns, strictly earlier prefix sums, splits, history strata | `common.py` |
 | 3.3 Baseline | separate shrinkage estimator (SSE) features of Andrić et al., rebuilt from the released SQL | `andric.py` |
 | 3.4 PACE | Gaussian crossed random effects fit by backfitting, one penalty per block | `pace_model.py` |
@@ -73,7 +76,7 @@ The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_
 | 3.8 Attribution, ordinal head | Shapley attribution over personal, community and context, and a cumulative logit head | `run_evaluate.py` |
 | 3.9 Design choices | the gate against a log count rule, an effect size rule, a track record rule and stronger shrinkage, attribution with every penalty fixed at k = 4, logs the gate needs | `run_design_refits.py`, `run_design_checks.py` |
 | 4.2 Splits | Protocol A and Protocol B | `common.py`, `run_data_stats.py` |
-| 4.3 Baselines | official grade, SSE with linear regression and random forest, SVD, LightGBM | `run_baselines.py`, `features.py` |
+| 4.3 Models | official grade, SSE with linear regression and random forest, SVD, LightGBM | `run_baselines.py`, `features.py` |
 | 4.4 Metrics | RMSE, displayed RMSE, per climber RMSE, disagreement RMSE, macro F1, average precision, helped and hurt shares, cluster bootstrap | `metrics.py` |
 | 4.5 Settings | penalty tuning on development rows, runtime | `run_tune_pace.py`, `run_timing.py`, `record_env.py` |
 | 4.6 Development | consensus shape, adaptive shrinkage trial (dropped) | `run_consensus_shape.py`, `run_ash_trial.py`, `ash.py`, `eb_ash.py` |
@@ -86,7 +89,7 @@ The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_
 | 5.6 Grade relation | routes whose deviation shifts by a grade or more, disagreement by year, month and group, recent route averages | `run_regrade.py`, `run_window_check.py` |
 | 5.7 Errors | rule based causes, 100 sampled errors and their second reading | `run_errors.py`, `check_manual_labels.py` |
 | 5.9 Future directions | logs needed before the gate applies an effect of a given size | `run_design_checks.py` |
-| Appendix A | logs without a time of day, data facts | `run_dateonly.py`, `run_data_audit.py` |
+| Appendix A | logs without a time of day, data facts, the outdoor forest with the released four features per split, correctness checks | `run_dateonly.py`, `run_data_audit.py`, `check_rf_max_features.py`, `test_pace_exactness.py` |
 | Appendix B | precision and recall per label, errors by grade, calibration | `run_evaluate.py` |
 | Checks | prequential exactness, determinism, reproduction, leakage, Shapley sums, bootstrap, gate endpoints | `test_pace_exactness.py`, `verify_all.py` |
 | Output | LaTeX tables and PDF figures | `make_tables.py`, `make_figures.py`, `make_design_tables.py`, `make_design_figures.py` |

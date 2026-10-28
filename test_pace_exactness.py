@@ -1,7 +1,8 @@
 """Verification gate V1: the prequential PACE predictions equal a from-scratch fit on strictly earlier logs.
 Rows that are the first log of their day must match an exact refit on all earlier days to numerical precision.
 For rows with same-day earlier logs, the one-step within-day update is compared with an exact refit on all
-logs with a strictly earlier timestamp, and the approximation error is reported."""
+logs with a strictly earlier timestamp, and the approximation error is reported.
+Output: results/exactness_check.json (the numbers of the correctness checks in Appendix A)."""
 import numpy as np, pandas as pd
 from common import *
 from pace_model import *
@@ -38,6 +39,7 @@ for n in rng.choice(cand_b, 40, replace=False):
 print('(b) rows with same-day history: mean |exact - prequential| = %.2e, max = %.2e' % (np.mean(errs_b), np.max(errs_b)))
 # (c) no row uses its own label: perturb the labels of 5 random rows (one at a time) and confirm that no prediction
 # at or before the perturbed row's timestamp changes, while some later prediction does
+perturb = []
 for n in rng.choice(np.arange(1000, len(g)), 5, replace=False):
     d2 = d.copy(); d2[n] += 3
     res2 = prequential(d2, X, mk(), g.day.values, g.t.values)
@@ -45,3 +47,12 @@ for n in rng.choice(np.arange(1000, len(g)), 5, replace=False):
     print('(c) row', int(n), 'own change', abs(res2['pred'][n] - res['pred'][n]),
           '| max change at or before its timestamp', np.abs(res2['pred'] - res['pred'])[earlier_or_same].max(),
           '| some later prediction changes', bool(np.abs(res2['pred'] - res['pred'])[later].max() > 0))
+    perturb.append(dict(row=int(n), max_change_at_or_before=float(np.abs(res2['pred'] - res['pred'])[earlier_or_same].max()),
+                        later_prediction_changes=bool(np.abs(res2['pred'] - res['pred'])[later].max() > 0)))
+json.dump(dict(rows=int(len(g)), last_date=str(g.date.max()), penalties={k: LAM[k] for k in ('climber', 'route', 'env')},
+               first_timestamp_rows_checked=len(errs_a), first_timestamp_max_abs_error=float(np.max(errs_a)),
+               same_day_rows_checked=len(errs_b), same_day_mean_abs_error=float(np.mean(errs_b)),
+               same_day_max_abs_error=float(np.max(errs_b)), label_shift=3, perturbed_rows=perturb,
+               perturbed_max_change_at_or_before=max(p_['max_change_at_or_before'] for p_ in perturb),
+               every_perturbation_changes_a_later_prediction=all(p_['later_prediction_changes'] for p_ in perturb)),
+          open(f'{OUT_DIR}/exactness_check.json', 'w'), indent=1)

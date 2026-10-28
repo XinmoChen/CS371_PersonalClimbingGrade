@@ -22,5 +22,7 @@
  "logs_per_climber_median": 42.0,
  "logs_per_route_median": 5.0,
  "grade_min": 6,
- "grade_max": 22
+ "grade_max": 22,
+ "disagree_no_route_history": 0.1240620504646009,
+ "disagree_route_history_10plus": 0.04683713450954635
 }

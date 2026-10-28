@@ -1,4 +1,4 @@
-"""Routes whose deviation shifts during their life (Section 5, 'Routes whose grade changed').
+"""Routes whose deviation shifts during their life (Section 5.6, 'When the Grade Relation Changes', and Appendix B).
 
 For every route with at least 20 logs, the largest change in mean deviation between the logs before and after a
 split point (at least 5 logs on each side) is found. A route is flagged when that shift is at least one grade.

@@ -28,7 +28,9 @@ for setting in ('indoor', 'outdoor'):
                  climbers_disagree_once=float(g.assign(x=g.dev != 0).groupby('user_id').x.any().mean()),
                  logs_per_climber_median=float(g.groupby('user_id').size().median()),
                  logs_per_route_median=float(g.groupby('route_id').size().median()),
-                 grade_min=int(g.grade_id.min()), grade_max=int(g.grade_id.max()))
+                 grade_min=int(g.grade_id.min()), grade_max=int(g.grade_id.max()),
+                 disagree_no_route_history=float((g.dev[g.n_route == 0] != 0).mean()),
+                 disagree_route_history_10plus=float((g.dev[g.n_route >= 10] != 0).mean()))
     json.dump(facts, open(f'{OUT_DIR}/data_facts_{setting}.json', 'w'), indent=1)
     print(json.dumps(facts))
 df = pd.DataFrame(rows)

@@ -1,0 +1,44 @@
+{
+ "rows": 30190,
+ "last_date": "2018-11-30 23:54:17",
+ "penalties": {
+  "climber": 40.0,
+  "route": 3.0,
+  "env": 30.0
+ },
+ "first_timestamp_rows_checked": 40,
+ "first_timestamp_max_abs_error": 1.3363060456794695e-07,
+ "same_day_rows_checked": 40,
+ "same_day_mean_abs_error": 0.0029597664615803473,
+ "same_day_max_abs_error": 0.053365961085329205,
+ "label_shift": 3,
+ "perturbed_rows": [
+  {
+   "row": 12894,
+   "max_change_at_or_before": 8.881784197001252e-16,
+   "later_prediction_changes": true
+  },
+  {
+   "row": 1476,
+   "max_change_at_or_before": 5.551115123125783e-17,
+   "later_prediction_changes": true
+  },
+  {
+   "row": 23117,
+   "max_change_at_or_before": 1.491862189340054e-16,
+   "later_prediction_changes": true
+  },
+  {
+   "row": 14427,
+   "max_change_at_or_before": 5.551115123125783e-17,
+   "later_prediction_changes": true
+  },
+  {
+   "row": 25370,
+   "max_change_at_or_before": 1.1102230246251565e-16,
+   "later_prediction_changes": true
+  }
+ ],
+ "perturbed_max_change_at_or_before": 8.881784197001252e-16,
+ "every_perturbation_changes_a_later_prediction": true
+}

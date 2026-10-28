@@ -26,6 +26,7 @@ run python3 run_pace.py outdoor A 7                 # outdoor PACE refits weekly
 run python3 run_pace.py outdoor B 7
 run python3 run_baselines.py indoor
 run python3 run_baselines.py outdoor
+run python3 check_rf_max_features.py                # outdoor forest with the released 4 features per split (Appendix A)
 run python3 run_ablation.py indoor
 run python3 run_gbm_variants.py indoor
 run python3 run_gbm_variants.py outdoor

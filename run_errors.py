@@ -1,4 +1,4 @@
-"""Error analysis (Section 5). Population: Protocol A indoor test logs whose displayed PACE prediction is wrong
+"""Error analysis (Section 5.7). Population: Protocol A indoor test logs whose displayed PACE prediction is wrong
 on a disagreement log (the climber's grade differs from the official one and PACE displays another value).
 Each error gets one cause by explicit rules applied in priority order; the rules were written after reading
 a random sample of errors and are then checked against a fresh random sample of 100 errors (errors_sample.csv).

@@ -57,7 +57,8 @@ def fit_predict_andric(model_fn, cols, fit_idx, pred_idx):
 def rf_fn(seed):
     # released (commented) configuration of the paper's random forest: max_depth 7, max_samples 0.3, and max_features 4,
     # which indoors is every feature. Outdoors the released set has 14 features, and 4 per split cannot resolve the
-    # absolute grade target (test RMSE above 0.9), so every feature is offered at each split in both settings.
+    # absolute grade target (development RMSE 0.91 under Protocol A and 0.99 under Protocol B, check_rf_max_features.py),
+    # so every feature is offered at each split in both settings.
     # 500 trees instead of 2000 (reproduces 0.378 indoors).
     return lambda: RandomForestRegressor(n_estimators=500, max_depth=7, max_features=None,
                                          max_samples=0.3, random_state=seed, n_jobs=2)
