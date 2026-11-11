@@ -33,7 +33,7 @@ pip install -r requirements.txt
 bash run_all.sh
 ```
 
-`run_all.sh` takes about six hours on two CPU cores. It runs, in order: data statistics, penalty tuning on development rows, PACE and every baseline under both protocols, ablations, boosted models, evaluation, every analysis of Section 5, the design checks of Section 3.9, the correctness checks, and finally `make_tables.py`, `make_figures.py`, `make_design_tables.py` and `make_design_figures.py`, which write `tables/` and `figures/`. Seeded models use seeds 0 to 4 and PACE is deterministic. The runtime in `results/timing_indoor.json` is meaningful only on an otherwise idle machine.
+`run_all.sh` takes about six hours on two CPU cores. It runs, in order: data statistics, penalty tuning on development rows, PACE and every baseline under both protocols, ablations, boosted models, evaluation, every analysis of Section 5, the design checks of Section 3.9, the correctness checks, and finally `make_tables.py`, `make_compact_tables.py`, `make_figures.py`, `make_design_tables.py` and `make_design_figures.py`, which write `tables/` and `figures/`. Seeded models use seeds 0 to 4 and PACE is deterministic. The runtime in `results/timing_indoor.json` is meaningful only on an otherwise idle machine.
 
 ### What a rerun reproduces
 
@@ -47,6 +47,8 @@ A clean rerun of `run_all.sh` from a fresh clone, on the package versions in `re
 - Runtimes differ.
 
 The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_tables.py`, `make_design_figures.py`) were added after that rerun. We ran them with Python 3.13.16 and the package versions in `requirements.txt`, on two CPU cores, in about 40 minutes. On the way, we rebuilt the indoor predictions of PACE, its source subsets, every baseline and the boosted models, and each reproduced its released test RMSE to six decimals. A second run of the checks wrote identical result files.
+
+`make_compact_tables.py` was added later still. It copies the cells of Table 5 and of the helped and hurt table of Section 5.4 from the full tables that `make_tables.py` writes. Run on the released result files, it writes both tables exactly as they appear in the paper, byte for byte.
 
 `test_pace_exactness.py`, `run_ash_trial.py` and `check_rf_max_features.py` also save the numbers they print (`exactness_check.json`, `ash_trial_route.json`, `ash_trial_all.json` and `rf_max_features_outdoor.json`), and `run_data_stats.py` adds the disagreement rates quoted in the introduction to `data_facts_<setting>.json`. Rerunning these scripts changed no existing value in any result file.
 
@@ -80,7 +82,7 @@ The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_
 | 4.4 Metrics | RMSE, displayed RMSE, per climber RMSE, disagreement RMSE, macro F1, average precision, helped and hurt shares, cluster bootstrap | `metrics.py` |
 | 4.5 Settings | penalty tuning on development rows, runtime | `run_tune_pace.py`, `run_timing.py`, `record_env.py` |
 | 4.6 Development | consensus shape, adaptive shrinkage trial (dropped) | `run_consensus_shape.py`, `run_ash_trial.py`, `ash.py`, `eb_ash.py` |
-| 4.7 Results | main tables, paired bootstrap for every comparison in the text | `run_evaluate.py`, `run_paired.py` |
+| 4.7 Results | main tables (full in Appendix B, compact in Section 4.7), paired bootstrap for every comparison in the text | `run_evaluate.py`, `run_paired.py`, `make_compact_tables.py` |
 | 5.1 Attribution | Shapley values, ablations, why the ablations behave as they do | `run_evaluate.py`, `run_ablation.py`, `run_mechanisms.py` |
 | 5.2 Sparse history | results by route and climber history, climber history budget, gain grid | `run_evaluate.py`, `run_budget.py`, `run_gain_grid.py` |
 | 5.3 Where PACE improves | paired differences of PACE against the published forest and of PACE-GBM against plain boosting, by route history, climber history and label, and the size of each model's predictions | `run_design_checks.py` |
@@ -92,7 +94,7 @@ The design checks (`run_design_refits.py`, `run_design_checks.py`, `make_design_
 | Appendix A | logs without a time of day, data facts, the outdoor forest with the released four features per split, correctness checks | `run_dateonly.py`, `run_data_audit.py`, `check_rf_max_features.py`, `test_pace_exactness.py` |
 | Appendix B | precision and recall per label, errors by grade, calibration | `run_evaluate.py` |
 | Checks | prequential exactness, determinism, reproduction, leakage, Shapley sums, bootstrap, gate endpoints | `test_pace_exactness.py`, `verify_all.py` |
-| Output | LaTeX tables and PDF figures | `make_tables.py`, `make_figures.py`, `make_design_tables.py`, `make_design_figures.py` |
+| Output | LaTeX tables and PDF figures | `make_tables.py`, `make_compact_tables.py`, `make_figures.py`, `make_design_tables.py`, `make_design_figures.py` |
 
 ## Notes
 

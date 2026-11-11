@@ -63,6 +63,7 @@ run python3 verify_all.py
 run python3 record_env.py
 run python3 run_timing.py                           # meaningful only on an otherwise idle machine
 run python3 make_tables.py indoor outdoor
+run python3 make_compact_tables.py                 # Table 5 and the helped and hurt table of Section 5.4, from the full tables
 run python3 make_figures.py
 run python3 make_design_tables.py
 run python3 make_design_figures.py
