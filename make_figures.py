@@ -75,6 +75,18 @@ def fig_gate(setting='indoor', proto='A'):
     fig.tight_layout(); fig.savefig(f'{FIG}/gate_{setting}_{proto}.pdf'); fig.savefig(f'{FIG}/gate_{setting}_{proto}.png'); plt.close(fig)
 
 
+# Plain labels for the causes in error_taxonomy.csv (Section 5.7 defines each rule).
+LABELS_ERRORS = {
+    'Right direction, too cautious to show': 'Leaned the right way, too little to change the shown grade',
+    'New route, no community evidence': 'New route, no one else had logged it yet',
+    'Right direction, too few steps': 'Shown grade moved the right way, not as far as the climber',
+    'Lone dissent, no signal anywhere': 'Only this climber disagreed, no one on the route agreed',
+    'Evidence pointed the other way': 'Earlier evidence pointed the opposite way',
+    'Other': 'None of the above',
+    'Early dissent, confirmed later': 'First to disagree, later climbers agreed',
+}
+
+
 def fig_errors():
     df = pd.read_csv(f'{OUT_DIR}/error_taxonomy.csv', index_col=0).sort_values('share')
     fig, ax = plt.subplots(figsize=(3.3, 2.6))
@@ -82,11 +94,11 @@ def fig_errors():
     v = 100 * df.share.values
     ax.barh(y, v, color=BLUE, height=0.42)
     for yi, vi, name in zip(y, v, df.index):
-        name = {'Lone dissent, no signal anywhere': 'Lone dissent, no signal on the route'}.get(name, name)
+        name = LABELS_ERRORS.get(name, name)
         ax.text(0, yi + 0.27, name, va='bottom', ha='left', fontsize=7.5, color=INK)
         ax.text(vi + 0.6, yi, f'{vi:.1f}%', va='center', fontsize=7.5, color=INK2)
     ax.set_yticks([]); ax.spines['left'].set_visible(False); ax.set_axisbelow(True)
-    ax.set_xlabel('Share of displayed errors (%)', fontsize=8); ax.tick_params(axis='x', labelsize=7.5)
+    ax.set_xlabel("Share of PACE's wrong shown grades (%)", fontsize=8); ax.tick_params(axis='x', labelsize=7.5)
     ax.grid(axis='y', visible=False)
     ax.set_xlim(0, v.max() * 1.18); ax.set_ylim(-0.45, y.max() + 0.85)
     fig.savefig(f'{FIG}/errors.pdf', bbox_inches='tight', pad_inches=0.03); fig.savefig(f'{FIG}/errors.png', bbox_inches='tight', pad_inches=0.03); plt.close(fig)
