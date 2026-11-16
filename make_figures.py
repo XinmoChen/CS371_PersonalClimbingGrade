@@ -75,32 +75,33 @@ def fig_gate(setting='indoor', proto='A'):
     fig.tight_layout(); fig.savefig(f'{FIG}/gate_{setting}_{proto}.pdf'); fig.savefig(f'{FIG}/gate_{setting}_{proto}.png'); plt.close(fig)
 
 
-# Plain labels for the causes in error_taxonomy.csv (Section 5.7 defines each rule).
+# Short names for the causes in error_taxonomy.csv. Section 5.7 explains each one.
 LABELS_ERRORS = {
-    'Right direction, too cautious to show': 'Leaned the right way, too little to change the shown grade',
-    'New route, no community evidence': 'New route, no one else had logged it yet',
-    'Right direction, too few steps': 'Shown grade moved the right way, not as far as the climber',
-    'Lone dissent, no signal anywhere': 'Only this climber disagreed, no one on the route agreed',
-    'Evidence pointed the other way': 'Earlier evidence pointed the opposite way',
-    'Other': 'None of the above',
-    'Early dissent, confirmed later': 'First to disagree, later climbers agreed',
+    'Right direction, too cautious to show': 'Stuck on the official grade',
+    'New route, no community evidence': 'Brand new route',
+    'Right direction, too few steps': 'Moved, but not far enough',
+    'Lone dissent, no signal anywhere': 'Lone outlier opinion',
+    'Evidence pointed the other way': 'Misleading evidence',
+    'Other': 'Other',
+    'Early dissent, confirmed later': 'Ahead of the crowd',
 }
 
 
 def fig_errors():
     df = pd.read_csv(f'{OUT_DIR}/error_taxonomy.csv', index_col=0).sort_values('share')
-    fig, ax = plt.subplots(figsize=(3.3, 2.6))
+    fig, ax = plt.subplots(figsize=(2.15, 1.9))  # with the labels, the saved figure is about one column wide
     y = np.arange(len(df)) * 1.0
     v = 100 * df.share.values
-    ax.barh(y, v, color=BLUE, height=0.42)
-    for yi, vi, name in zip(y, v, df.index):
-        name = LABELS_ERRORS.get(name, name)
-        ax.text(0, yi + 0.27, name, va='bottom', ha='left', fontsize=7.5, color=INK)
-        ax.text(vi + 0.6, yi, f'{vi:.1f}%', va='center', fontsize=7.5, color=INK2)
-    ax.set_yticks([]); ax.spines['left'].set_visible(False); ax.set_axisbelow(True)
-    ax.set_xlabel("Share of PACE's wrong shown grades (%)", fontsize=8); ax.tick_params(axis='x', labelsize=7.5)
+    ax.barh(y, v, color=BLUE, height=0.6)
+    for yi, vi in zip(y, v):
+        ax.text(vi + 0.9, yi, f'{vi:.1f}%', va='center', fontsize=7.5, color=INK2)
+    ax.set_yticks(y)
+    ax.set_yticklabels([LABELS_ERRORS.get(n, n) for n in df.index], fontsize=8, color=INK)
+    ax.tick_params(axis='y', length=0)
+    ax.spines['left'].set_visible(False); ax.set_axisbelow(True)
+    ax.set_xlabel('Share of misses (%)', fontsize=8); ax.tick_params(axis='x', labelsize=7.5)
     ax.grid(axis='y', visible=False)
-    ax.set_xlim(0, v.max() * 1.18); ax.set_ylim(-0.45, y.max() + 0.85)
+    ax.set_xlim(0, v.max() * 1.18); ax.set_ylim(-0.6, y.max() + 0.6)
     fig.savefig(f'{FIG}/errors.pdf', bbox_inches='tight', pad_inches=0.03); fig.savefig(f'{FIG}/errors.png', bbox_inches='tight', pad_inches=0.03); plt.close(fig)
 
 
